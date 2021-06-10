@@ -4,11 +4,20 @@ from pathlib import Path
 
 filepath = Path(__file__).resolve().parent
 
-file1 = Path.joinpath(filepath, "test1.mp3")
-file2 = Path.joinpath(filepath, "test2.mp3")
+audio_file_array = []
 
-sound1 = AudioSegment.from_mp3(file1)
-sound2 = AudioSegment.from_mp3(file2)
+file1 = Path.joinpath(filepath, "Someone voice", "test1.mp3")
+file2 = Path.joinpath(filepath, "Someone voice", "test2.mp3")
+
+audio_path = Path(filepath, "Someone voice").glob('**/*.*')
+for audio_file in audio_path:
+    audio_file_array.append(AudioSegment.from_file(audio_file))
+
+# sound1 = AudioSegment.from_file(file1)
+# sound2 = AudioSegment.from_file(file2)
+
+sound1 = audio_file_array[0]
+sound2 = audio_file_array[1]
 
 silence_duration_minutes_1 = 0.1
 silence_duration_minutes_2 = 0.2
